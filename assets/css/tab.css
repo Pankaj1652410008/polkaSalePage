@@ -1,0 +1,104 @@
+.tab {
+    --animation-time: 200ms;
+    position: relative;
+  }
+  body{
+    font-family: 'Poppins' !important;
+  }
+  
+  .tab::after {
+    content: "";
+    display: block;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: var(--underline-size, 2px);
+    position: absolute;
+    /* background-color: var(--underline-color, currentColor); */
+    background-color: rgb(12 236 244);
+    transition: transform ease var(--animation-time, 200ms),
+      opacity ease 0ms 200ms;
+    opacity: 0;
+  }
+  .tab.after-slide::after {
+    transform: translateX(100%);
+  }
+  .tab.before-slide::after {
+    transform: translateX(-100%);
+  }
+  
+  .section-slk .tab:active ~ .tab::after {
+    transform: translateX(1%);
+  }
+  
+  .tabs-wrapper:not(:hover) .tab:not(.is-active)::after {
+    transform: translateY(100%);
+  }
+  
+  .tabs:hover .tab:active::after,
+  .tabs-wrapper:hover .tabs:hover .tab:active::after {
+    transition-delay: 0ms, 0ms;
+  }
+  
+  .tab.is-active::after {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  
+  /* Just for styling */
+  .tabs-wrapper {
+    width: 100%;
+    border-bottom: 1px solid #5d5d5d !important;
+  }
+  
+  .tabs {
+    display: flex;
+    /* justify-content: space-between; */
+  }
+  
+  .tab {
+    --underline-color: #004eff;
+    --underline-size: 3px;
+    color: inherit;
+    padding: 13px;
+    text-decoration: none;
+    white-space: nowrap;
+    line-height: 1;
+    width: inherit;
+  }
+  
+  .tab:first-child {
+    padding-left: 0 !important;
+  }
+  .tab:last-child {
+    padding-right: 16px !important;
+  }
+  .active-content .text {
+    display: none;
+  }
+  .active-content .text.active-text {
+    display: block;
+  }
+  
+  .section-slk .tab {
+    color: rgb(145, 158, 171)!important;
+  }
+  .section-slk .tabs-wrapper .tabs .tab.is-active {
+    color: white !important;
+    /* font-weight: bold; */
+  }
+  
+  @media (max-width: 1000px) {
+    .tabs-wrapper {
+      overflow-x: scroll;
+    }
+    ::-webkit-scrollbar {
+      background: transparent;
+      display: none; /* Optional: just make scrollbar invisible */
+    }
+    /* Optional: show position indicator in red */
+    ::-webkit-scrollbar-thumb {
+      background: transparent;
+    }
+  }
+  
